@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Datependency</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Datependency">
+          <span class="brand-mark"></span>
+          <span>Datependency</span>
+        </a>
+        <div class="topbar-actions">
+          <div class="search-wrap">
+            <span class="search-icon">Search</span>
+            <input id="searchInput" type="search" placeholder="Search versions" autocomplete="off">
+          </div>
+          <div class="select-wrap">
+            <span class="select-label">Sort by</span>
+            <select id="sortSelect" class="sort-select" aria-label="Sort versions">
+              <option value="number">Number</option>
+              <option value="date">GA date</option>
+            </select>
+          </div>
+          <a class="settings-link" href="/settings" aria-label="Settings" title="Settings">
+            <span class="settings-icon" aria-hidden="true"></span>
+          </a>
+        </div>
+      </header>
+
+      <main>
+        <div class="workspace">
+          <div class="view-stack">
+        <section id="listView" class="view">
+          <div class="view-toolbar">
+            <div class="view-toolbar-left">
+              <button id="newReleaseButton" class="primary-button" type="button">New Version</button>
+              <label class="released-filter">
+                <input id="showReleasedInput" type="checkbox">
+                <span>Show released</span>
+              </label>
+            </div>
+            <div class="segmented-control" aria-label="Version view">
+              <button id="detailsViewButton" type="button" class="active">Details</button>
+              <button id="timelineViewButton" type="button">Timeline</button>
+              <button id="collapseViewButton" type="button">Collapsed</button>
+            </div>
+          </div>
+          <div id="releaseList" class="release-list"></div>
+          <div id="timelineView" class="timeline-view hidden"></div>
+        </section>
+
+        <section id="settingsView" class="view hidden">
+          <section class="settings-grid">
+            <div class="section-head">
+              <h2>Milestone Template</h2>
+              <button id="addTemplateMilestoneButton" class="secondary-button" type="button">Add Milestone</button>
+            </div>
+            <div id="templateEditor" class="template-editor"></div>
+          </section>
+        </section>
+
+        <section id="detailView" class="view hidden">
+          <div class="detail-nav">
+            <a href="/" class="back-link">Back to versions</a>
+            <div class="detail-actions">
+              <button id="releaseToggleButton" class="secondary-button" type="button">Mark Released</button>
+              <button id="deleteReleaseButton" class="ghost-danger" type="button">Delete</button>
+            </div>
+          </div>
+
+          <div class="release-header">
+            <div class="release-title-block">
+              <input id="releaseNameInput" class="release-name-input" aria-label="Version name">
+              <span id="statusBadge" class="status-badge"></span>
+            </div>
+            <div class="ga-panel">
+              <span>GA Date</span>
+              <strong id="gaDateText">No date</strong>
+            </div>
+          </div>
+
+          <div id="warningPanel" class="warning-panel hidden"></div>
+          <div class="editor-toolbar">
+            <h2>Milestones</h2>
+            <button id="addMilestoneButton" class="secondary-button" type="button">Add Milestone</button>
+          </div>
+          <div id="milestoneEditor" class="milestone-editor"></div>
+        </section>
+          </div>
+          <aside class="notification-panel" aria-label="Notifications">
+            <div class="notification-head">
+              <h2>Alerts</h2>
+              <span id="notificationCount" class="notification-count">0</span>
+            </div>
+            <div id="notificationList" class="notification-list"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <dialog id="releaseDialog" class="release-dialog">
+      <form id="releaseForm" method="dialog">
+        <div class="dialog-head">
+          <h2>Create version</h2>
+          <button class="icon-button" type="button" id="closeDialogButton" aria-label="Close">x</button>
+        </div>
+        <label>
+          <span>Version</span>
+          <input id="releaseNameField" required maxlength="80" placeholder="15.0.0.0">
+        </label>
+        <label>
+          <span>GA date</span>
+          <input id="baseDateField" type="date" required>
+        </label>
+        <button class="primary-button full" type="submit">Create Version</button>
+      </form>
+    </dialog>
+
+    <dialog id="deleteDialog" class="release-dialog">
+      <form id="deleteForm" method="dialog">
+        <div class="dialog-head">
+          <h2>Delete version</h2>
+          <button class="icon-button" type="button" id="closeDeleteDialogButton" aria-label="Close">x</button>
+        </div>
+        <p id="deleteDialogText" class="dialog-copy"></p>
+        <div class="dialog-actions">
+          <button class="secondary-button" type="button" id="cancelDeleteButton">Cancel</button>
+          <button class="danger-button" type="submit">OK</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
