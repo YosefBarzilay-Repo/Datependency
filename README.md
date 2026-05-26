@@ -54,5 +54,5 @@ http://localhost:3000/settings
 Run the dependency engine tests:
 
 ```bash
-npm test
+npm test 
 ```
